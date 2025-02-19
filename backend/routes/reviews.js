@@ -3,7 +3,7 @@ const natural = require('natural');
 const auth = require('../middleware/auth');
 const Review = require('../models/Review');
 
-// Initialize sentiment analyzer with required parameters
+
 const analyzer = new natural.SentimentAnalyzer(
   'English',
   natural.PorterStemmer,
@@ -11,7 +11,7 @@ const analyzer = new natural.SentimentAnalyzer(
 );
 const stemmer = natural.PorterStemmer;
 
-// Manual tagging route remains the same
+
 router.put('/:id/tags', auth('admin'), async (req, res) => {
   const review = await Review.findByIdAndUpdate(
     req.params.id,
@@ -21,7 +21,7 @@ router.put('/:id/tags', auth('admin'), async (req, res) => {
   res.json(review);
 });
 
-// Updated sentiment analysis function
+
 function analyzeSentiment(text) {
   const tokenized = new natural.WordTokenizer().tokenize(text);
   const stemmed = tokenized.map(stemmer.stem);
@@ -29,7 +29,7 @@ function analyzeSentiment(text) {
   return score > 0.2 ? 'Positive' : score < -0.2 ? 'Negative' : 'Neutral';
 }
 
-// Rest of the auto-tag route remains the same
+
 router.post('/auto-tag', auth('admin'), async (req, res) => {
   const reviews = await Review.find({ 'tags': { $exists: false } });
   

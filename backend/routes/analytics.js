@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const Review = require('../models/Review');
 
-// Get average ratings per location
+
 router.get('/average-ratings', async (req, res) => {
   try {
     const results = await Review.aggregate([
@@ -18,7 +18,7 @@ router.get('/average-ratings', async (req, res) => {
   }
 });
 
-// Get top/bottom performing agents
+
 router.get('/agent-performance', async (req, res) => {
   try {
     const topAgents = await Review.aggregate([
