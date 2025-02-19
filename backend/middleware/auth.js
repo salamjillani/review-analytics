@@ -5,13 +5,9 @@ const auth = (requiredRole) => async (req, res, next) => {
   try {
     const token = req.header('Authorization').replace('Bearer ', '');
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    const user = await User.findOne({ _id: decoded.id });
+    const user = await User.findById(decoded.id);
 
-    if (!user) {
-      throw new Error();
-    }
-
-    if (user.role !== requiredRole) {
+    if (!user || (requiredRole && user.role !== requiredRole)) {
       return res.status(403).send('Access denied');
     }
 

@@ -1,10 +1,10 @@
 const mongoose = require('mongoose');
 
 const reviewSchema = new mongoose.Schema({
-  agentId: String,
-  location: String,
-  rating: Number,
-  comment: String,
+  agentId: { type: String, required: true },
+  location: { type: String, required: true },
+  rating: { type: Number, required: true, min: 1, max: 5 },
+  comment: { type: String, required: true },
   tags: {
     sentiment: { type: String, enum: ['Positive', 'Neutral', 'Negative'] },
     performance: { type: String, enum: ['Fast', 'Average', 'Slow'] },
