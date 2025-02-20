@@ -1,22 +1,24 @@
-
-import { useState } from 'react';
-import axios from 'axios';
-import { useNavigate, Link } from 'react-router-dom';
+import { useState } from "react";
+import axios from "axios";
+import { useNavigate, Link } from "react-router-dom";
 
 export default function Register() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [adminSecret, setAdminSecret] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [adminSecret, setAdminSecret] = useState("");
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('/api/auth/register', { email, password, adminSecret });
-      alert('Registration successful! Please login.');
-      navigate('/login');
+      await axios.post("/api/auth/register", { email, password, adminSecret });
+      alert("Registration successful! Please login.");
+      navigate("/login");
     } catch (error) {
-      alert('Registration failed: ' + (error.response?.data?.message || error.message));
+      alert(
+        "Registration failed: " +
+          (error.response?.data?.message || error.message)
+      );
     }
   };
 
@@ -27,9 +29,9 @@ export default function Register() {
           Create your account
         </h2>
         <p className="mt-2 text-center text-sm text-gray-600">
-          Already have an account?{' '}
-          <Link 
-            to="/login" 
+          Already have an account?{" "}
+          <Link
+            to="/login"
             className="font-medium text-indigo-600 hover:text-indigo-500 transition-colors"
           >
             Sign in
@@ -41,8 +43,8 @@ export default function Register() {
         <div className="bg-white py-6 px-4 sm:py-8 sm:px-10 shadow-xl rounded-lg">
           <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
             <div>
-              <label 
-                htmlFor="email" 
+              <label
+                htmlFor="email"
                 className="block text-sm font-medium text-gray-700"
               >
                 Email address
@@ -61,8 +63,8 @@ export default function Register() {
             </div>
 
             <div>
-              <label 
-                htmlFor="password" 
+              <label
+                htmlFor="password"
                 className="block text-sm font-medium text-gray-700"
               >
                 Password
@@ -81,8 +83,8 @@ export default function Register() {
             </div>
 
             <div>
-              <label 
-                htmlFor="adminSecret" 
+              <label
+                htmlFor="adminSecret"
                 className="block text-sm font-medium text-gray-700"
               >
                 Admin Secret

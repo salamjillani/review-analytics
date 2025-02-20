@@ -106,7 +106,6 @@ const Dashboard = () => {
     const x = cx + radius * Math.cos(-midAngle * RADIAN);
     const y = cy + radius * Math.sin(-midAngle * RADIAN);
 
-
     if (percent < 0.05) return null;
 
     return (
@@ -126,7 +125,9 @@ const Dashboard = () => {
   if (loading) {
     return (
       <div className="min-h-screen bg-gray-50 p-2 sm:p-4 md:p-6 lg:p-8 flex items-center justify-center">
-        <div className="text-base md:text-lg text-gray-600">Loading dashboard data...</div>
+        <div className="text-base md:text-lg text-gray-600">
+          Loading dashboard data...
+        </div>
       </div>
     );
   }
@@ -141,7 +142,6 @@ const Dashboard = () => {
 
   return (
     <div className="min-h-screen bg-gray-50 p-2 sm:p-4 md:p-6 lg:p-8">
-   
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-4 mb-4 sm:mb-6 lg:mb-8">
         {[
           {
@@ -206,9 +206,7 @@ const Dashboard = () => {
         ))}
       </div>
 
-
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 sm:gap-4 lg:gap-6">
-    
         <div className="bg-white rounded-xl shadow-lg overflow-hidden">
           <div className="p-3 sm:p-4 lg:p-6 border-b border-gray-100">
             <h3 className="text-base lg:text-lg font-semibold text-gray-800">
@@ -280,7 +278,6 @@ const Dashboard = () => {
           </div>
         </div>
 
- 
         <div className="bg-white rounded-xl shadow-lg overflow-hidden">
           <div className="p-3 sm:p-4 lg:p-6 border-b border-gray-100">
             <h3 className="text-base lg:text-lg font-semibold text-gray-800">
@@ -306,7 +303,6 @@ const Dashboard = () => {
           </div>
         </div>
 
-     
         <div className="bg-white rounded-xl shadow-lg overflow-hidden">
           <div className="p-3 sm:p-4 lg:p-6 border-b border-gray-100">
             <h3 className="text-base lg:text-lg font-semibold text-gray-800">

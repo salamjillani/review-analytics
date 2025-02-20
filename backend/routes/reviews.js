@@ -1,15 +1,15 @@
+const router = require("express").Router();
+const {
+  autoTagReviews,
+  manualTagReview,
+} = require("../controllers/reviewController");
+const auth = require("../middleware/auth");
+const Review = require("../models/Review");
 
-const router = require('express').Router();
-const { autoTagReviews, manualTagReview } = require('../controllers/reviewController');
-const auth = require('../middleware/auth');
-const Review = require('../models/Review');
-
-
-
-router.get('/', auth(), async (req, res) => {
+router.get("/", auth(), async (req, res) => {
   try {
     const { page = 1, limit = 10, location, minRating, agentId } = req.query;
-    
+
     const query = {};
     if (location) query.location = location;
     if (minRating) query.rating = { $gte: parseInt(minRating) };
@@ -26,40 +26,36 @@ router.get('/', auth(), async (req, res) => {
     res.json({
       reviews,
       totalPages: Math.ceil(count / limit),
-      currentPage: page
+      currentPage: page,
     });
   } catch (error) {
-    res.status(500).json({ error: 'Failed to fetch reviews' });
+    res.status(500).json({ error: "Failed to fetch reviews" });
   }
 });
 
-
-router.post('/', auth(), async (req, res) => {
+router.post("/", auth(), async (req, res) => {
   try {
     const review = new Review({
       ...req.body,
-      createdAt: new Date()
+      createdAt: new Date(),
     });
     await review.save();
     res.status(201).json(review);
   } catch (error) {
-    res.status(500).json({ error: 'Failed to create review' });
+    res.status(500).json({ error: "Failed to create review" });
   }
 });
 
+router.post("/auto-tag", auth("admin"), autoTagReviews);
 
-router.post('/auto-tag', auth('admin'), autoTagReviews);
+router.put("/:id/tags", auth("admin"), manualTagReview);
 
-
-router.put('/:id/tags', auth('admin'), manualTagReview);
-
-
-router.delete('/:id', auth('admin'), async (req, res) => {
+router.delete("/:id", auth("admin"), async (req, res) => {
   try {
     await Review.findByIdAndDelete(req.params.id);
-    res.json({ message: 'Review deleted successfully' });
+    res.json({ message: "Review deleted successfully" });
   } catch (error) {
-    res.status(500).json({ error: 'Failed to delete review' });
+    res.status(500).json({ error: "Failed to delete review" });
   }
 });
 

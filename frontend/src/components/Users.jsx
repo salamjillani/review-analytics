@@ -1,22 +1,22 @@
-import { useState, useEffect } from 'react';
-import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { useState, useEffect } from "react";
+import axios from "axios";
+import { Link } from "react-router-dom";
 
 const Users = () => {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
 
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const token = localStorage.getItem('token');
-        const response = await axios.get('/api/users', {
-          headers: { Authorization: `Bearer ${token}` }
+        const token = localStorage.getItem("token");
+        const response = await axios.get("/api/users", {
+          headers: { Authorization: `Bearer ${token}` },
         });
         setUsers(response.data);
       } catch (err) {
-        setError(err.response?.data?.error || 'Failed to fetch users');
+        setError(err.response?.data?.error || "Failed to fetch users");
       } finally {
         setLoading(false);
       }
@@ -25,16 +25,16 @@ const Users = () => {
   }, []);
 
   const handleDelete = async (userId) => {
-    if (!window.confirm('Are you sure you want to delete this user?')) return;
-    
+    if (!window.confirm("Are you sure you want to delete this user?")) return;
+
     try {
-      const token = localStorage.getItem('token');
+      const token = localStorage.getItem("token");
       await axios.delete(`/api/users/${userId}`, {
-        headers: { Authorization: `Bearer ${token}` }
+        headers: { Authorization: `Bearer ${token}` },
       });
-      setUsers(users.filter(user => user._id !== userId));
+      setUsers(users.filter((user) => user._id !== userId));
     } catch (err) {
-      setError(err.response?.data?.error || 'Deletion failed');
+      setError(err.response?.data?.error || "Deletion failed");
     }
   };
 
@@ -63,7 +63,7 @@ const Users = () => {
               Manage Users
             </h1>
           </div>
-          
+
           <div className="p-4 sm:p-6">
             <div className="overflow-x-auto">
               <table className="w-full">
@@ -75,9 +75,14 @@ const Users = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {users.map(user => (
-                    <tr key={user._id} className="hover:bg-gray-50 transition-colors">
-                      <td className="py-3 px-4 text-sm text-gray-700">{user.email}</td>
+                  {users.map((user) => (
+                    <tr
+                      key={user._id}
+                      className="hover:bg-gray-50 transition-colors"
+                    >
+                      <td className="py-3 px-4 text-sm text-gray-700">
+                        {user.email}
+                      </td>
                       <td className="py-3 px-4">
                         <span className="px-2 py-1 bg-indigo-100 text-indigo-700 rounded-full text-xs font-medium">
                           {user.role}
@@ -95,7 +100,7 @@ const Users = () => {
                   ))}
                 </tbody>
               </table>
-              
+
               {users.length === 0 && (
                 <div className="text-center py-6 text-gray-500">
                   No users found
