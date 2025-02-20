@@ -1,3 +1,4 @@
+//backend/routes/auth.js
 const router = require('express').Router();
 const { login, register } = require('../controllers/authController');
 
