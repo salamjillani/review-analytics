@@ -1,11 +1,11 @@
-//backend/routes/reviews.js
+
 const router = require('express').Router();
 const { autoTagReviews, manualTagReview } = require('../controllers/reviewController');
 const auth = require('../middleware/auth');
 const Review = require('../models/Review');
 
 
-// Get all reviews with pagination and filters
+
 router.get('/', auth(), async (req, res) => {
   try {
     const { page = 1, limit = 10, location, minRating, agentId } = req.query;
@@ -33,7 +33,7 @@ router.get('/', auth(), async (req, res) => {
   }
 });
 
-// Create new review
+
 router.post('/', auth(), async (req, res) => {
   try {
     const review = new Review({
@@ -47,13 +47,13 @@ router.post('/', auth(), async (req, res) => {
   }
 });
 
-// Auto-tag reviews (admin only)
+
 router.post('/auto-tag', auth('admin'), autoTagReviews);
 
-// Manually tag a review (admin only)
+
 router.put('/:id/tags', auth('admin'), manualTagReview);
 
-// Delete a review (admin only)
+
 router.delete('/:id', auth('admin'), async (req, res) => {
   try {
     await Review.findByIdAndDelete(req.params.id);

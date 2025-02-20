@@ -1,8 +1,8 @@
-//backend/controllers/reviewController.js
+
 const Review = require('../models/Review');
 const natural = require('natural');
 
-// Issue detection configuration
+
 const ISSUE_INDICATORS = {
   LATE_DELIVERY: ['late', 'delay', 'slow', 'waited', 'forever', 'waiting'],
   WRONG_ITEMS: ['wrong', 'incorrect', 'missing', 'different'],
@@ -31,7 +31,7 @@ const PRICE_RANGE_MAP = {
   100: '$100+'
 };
 
-// Text analysis functions
+
 const analyzeIssues = (text) => {
   const lowercaseText = text.toLowerCase();
   return Object.entries(ISSUE_INDICATORS)
@@ -201,14 +201,14 @@ exports.getAnalytics = async (req, res) => {
       Review.distinct('location')
     ]);
 
-    // Fix priceRanges transformation
+
     const priceRangesResult = priceRanges.reduce((acc, curr) => {
       const rangeLabel = PRICE_RANGE_MAP[curr._id] || 'Other';
       acc[rangeLabel] = curr.count;
       return acc;
     }, {});
 
-    // Update response structure
+  
     res.json({
       success: true,
       data: {

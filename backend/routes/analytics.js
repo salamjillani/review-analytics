@@ -1,4 +1,4 @@
-//routes/analytics.js
+
 const router = require('express').Router();
 const Review = require('../models/Review');
 const auth = require('../middleware/auth');
@@ -7,7 +7,7 @@ router.get('/', auth(), async (req, res) => {
   try {
     const { location, minRating, priceRange, hasDiscount } = req.query;
     
-    // Build match stage based on filters
+ 
     const matchStage = {};
     if (location) matchStage.location = location;
     if (minRating) matchStage.rating = { $gte: parseInt(minRating) };
@@ -26,7 +26,7 @@ router.get('/', auth(), async (req, res) => {
       commonComplaints,
       locations
     ] = await Promise.all([
-      // Average ratings by location
+    
       Review.aggregate([
         { $match: matchStage },
         { 
@@ -38,8 +38,7 @@ router.get('/', auth(), async (req, res) => {
         },
         { $sort: { _id: 1 } }
       ]),
-      
-      // Agent performance
+    
       Review.aggregate([
         { $match: matchStage },
         { 
@@ -52,7 +51,7 @@ router.get('/', auth(), async (req, res) => {
         { $sort: { avgRating: -1 } }
       ]),
       
-      // Price range distribution with proper boundaries
+
       Review.aggregate([
         { $match: matchStage },
         {
@@ -79,7 +78,7 @@ router.get('/', auth(), async (req, res) => {
         return ranges;
       }),
       
-      // Common complaints with improved categorization
+ 
       Review.aggregate([
         { 
           $match: { 
@@ -98,7 +97,7 @@ router.get('/', auth(), async (req, res) => {
         { $limit: 5 }
       ]),
       
-      // All unique locations
+
       Review.distinct('location')
     ]);
 

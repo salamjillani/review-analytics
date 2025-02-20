@@ -1,4 +1,4 @@
-//backend/scripts/generateSampleData.js
+
 const mongoose = require('mongoose');
 const Review = require('../models/Review');
 require('dotenv').config();
@@ -17,7 +17,7 @@ const comments = [
   'Food arrived hot and on time'
 ];
 
-// Helper functions for analysis
+
 const analyzeIssues = (comment) => {
   const issues = [];
   const lowerComment = comment.toLowerCase();
@@ -64,8 +64,8 @@ const generateRandomReview = () => {
     rating: randomRating,
     comment: randomComment,
     orderPrice: randomPrice,
-    discountApplied: Math.random() > 0.7, // 30% chance of discount
-    createdAt: new Date(Date.now() - Math.floor(Math.random() * 30) * 24 * 60 * 60 * 1000), // Random date within last 30 days
+    discountApplied: Math.random() > 0.7,
+    createdAt: new Date(Date.now() - Math.floor(Math.random() * 30) * 24 * 60 * 60 * 1000),
     issues: analyzeIssues(randomComment),
     tags: {
       sentiment: analyzeSentiment(randomRating),
@@ -91,5 +91,5 @@ const generateSampleData = async (count) => {
   }
 };
 
-// Generate 500 sample reviews
+
 generateSampleData(500);

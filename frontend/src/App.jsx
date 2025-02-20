@@ -1,62 +1,72 @@
-//src/App.jsx
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Dashboard from './components/Dashboard';
-import Login from './components/Login';
-import Register from './components/Register';
-import Navbar from './components/Navbar';
-import PrivateRoute from './components/PrivateRoute';
+
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Dashboard from "./components/Dashboard";
+import Login from "./components/Login";
+import Register from "./components/Register";
+import Navbar from "./components/Navbar";
+import PrivateRoute from "./components/PrivateRoute";
+import Users from "./components/Users";
 
 function App() {
   return (
     <Router>
       <div className="min-h-screen bg-gray-50">
         <Navbar />
-        
-        {/* Main Content Area */}
+
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div className="w-full">
             <Routes>
-              <Route 
-                path="/" 
+              <Route
+                path="/"
                 element={
                   <PrivateRoute>
                     <div className="fade-in">
                       <Dashboard />
                     </div>
                   </PrivateRoute>
-                } 
+                }
               />
-              <Route 
-                path="/login" 
+              <Route
+                path="/login"
                 element={
                   <div className="fade-in">
                     <Login />
                   </div>
-                } 
+                }
               />
-              <Route 
-                path="/register" 
+              <Route
+                path="/register"
                 element={
                   <div className="fade-in">
                     <Register />
                   </div>
-                } 
+                }
+              />
+              <Route
+                path="/users"
+                element={
+                  <PrivateRoute>
+                    <div className="fade-in">
+                      <Users />
+                    </div>
+                  </PrivateRoute>
+                }
               />
             </Routes>
           </div>
         </div>
 
-        {/* Optional Footer */}
+      
         <footer className="mt-auto py-6 bg-white border-t border-gray-200">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <p className="text-center text-sm text-gray-500">
-              © {new Date().getFullYear()} Delivery Analytics. All rights reserved.
+              © {new Date().getFullYear()} Delivery Agent Review Analytics. All rights
+              reserved.
             </p>
           </div>
         </footer>
       </div>
 
-      {/* Global Styles */}
       <style>{`
         .fade-in {
           animation: fadeIn 0.3s ease-in-out;

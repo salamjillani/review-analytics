@@ -1,4 +1,4 @@
-//frontend/src/components/PrivateRoute.jsx
+
 import { Navigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 

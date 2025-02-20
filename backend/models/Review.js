@@ -1,4 +1,3 @@
-//backend/models/Review.js
 const mongoose = require('mongoose');
 
 const reviewSchema = new mongoose.Schema({
@@ -76,7 +75,7 @@ const reviewSchema = new mongoose.Schema({
   }
 });
 
-// Indexes
+
 reviewSchema.index({ location: 1, rating: 1 });
 reviewSchema.index({ agentId: 1, rating: 1 });
 reviewSchema.index({ 'tags.sentiment': 1, createdAt: -1 });

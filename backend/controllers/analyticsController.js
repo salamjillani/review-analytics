@@ -1,9 +1,8 @@
-//backend/controllers/analyticsController.js
 const Review = require("../models/Review");
 
 exports.getAnalytics = async (req, res) => {
     try {
-        const matchStage = {}; // Define your match criteria here
+        const matchStage = {};
 
         const priceRanges = await Review.aggregate([
             { $match: matchStage },

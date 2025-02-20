@@ -1,12 +1,12 @@
-//routes/users.js
+
 const router = require('express').Router();
 const auth = require('../middleware/auth');
 const User = require('../models/User');
 
-// Admin-only user management
+
 router.get('/', auth('admin'), async (req, res) => {
   try {
-    const users = await User.find().select('-password');
+    const users = await User.find({ role: 'user' }).select('-password'); 
     res.json(users);
   } catch (error) {
     res.status(500).json({ error: 'Server error' });

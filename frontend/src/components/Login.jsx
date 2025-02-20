@@ -1,4 +1,4 @@
-// frontend/src/components/Login.jsx
+
 import { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
@@ -22,7 +22,7 @@ export default function Login() {
           headers: {
             'Content-Type': 'application/json',
           },
-          timeout: 10000, // 10 second timeout
+          timeout: 10000, 
         }
       );
 
@@ -42,14 +42,14 @@ export default function Login() {
       let errorMessage = 'Login failed: ';
       
       if (err.response) {
-        // Server responded with error
+   
         errorMessage += err.response.data?.message || 
           `Server error (${err.response.status})`;
       } else if (err.request) {
-        // No response received
+
         errorMessage += 'No response from server. Please check your connection.';
       } else {
-        // Request setup error
+   
         errorMessage += err.message || 'Unknown error occurred';
       }
       
@@ -61,9 +61,9 @@ export default function Login() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
-      <div className="sm:mx-auto sm:w-full sm:max-w-md">
-        <h2 className="text-center text-3xl font-extrabold text-gray-900">
+    <div className="min-h-screen bg-gray-50 flex flex-col justify-center px-4 sm:px-6 lg:px-8">
+      <div className="w-full max-w-md mx-auto">
+        <h2 className="text-center text-2xl sm:text-3xl font-extrabold text-gray-900">
           Welcome back
         </h2>
         <p className="mt-2 text-center text-sm text-gray-600">
@@ -71,15 +71,15 @@ export default function Login() {
         </p>
       </div>
 
-      <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-        <div className="bg-white py-8 px-4 shadow-xl rounded-lg sm:px-10">
+      <div className="mt-6 sm:mt-8 w-full max-w-md mx-auto">
+        <div className="bg-white py-6 px-4 sm:py-8 sm:px-10 shadow-xl rounded-lg">
           {error && (
-            <div className="mb-4 p-4 bg-red-50 border border-red-200 rounded-lg">
-              <p className="text-sm text-red-600">{error}</p>
+            <div className="mb-4 p-3 sm:p-4 bg-red-50 border border-red-200 rounded-lg">
+              <p className="text-xs sm:text-sm text-red-600">{error}</p>
             </div>
           )}
           
-          <form onSubmit={handleSubmit} className="space-y-6">
+          <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
             <div>
               <label className="block text-sm font-medium text-gray-700">
                 Email
@@ -91,7 +91,7 @@ export default function Login() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   disabled={isLoading}
-                  className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 disabled:bg-gray-100 disabled:cursor-not-allowed"
+                  className="appearance-none block w-full px-3 py-2 text-sm sm:text-base border border-gray-300 rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 disabled:bg-gray-100 disabled:cursor-not-allowed"
                 />
               </div>
             </div>
@@ -107,16 +107,16 @@ export default function Login() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   disabled={isLoading}
-                  className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 disabled:bg-gray-100 disabled:cursor-not-allowed"
+                  className="appearance-none block w-full px-3 py-2 text-sm sm:text-base border border-gray-300 rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 disabled:bg-gray-100 disabled:cursor-not-allowed"
                 />
               </div>
             </div>
 
-            <div>
+            <div className="pt-2">
               <button
                 type="submit"
                 disabled={isLoading}
-                className="w-full flex justify-center py-2.5 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors disabled:bg-indigo-400 disabled:cursor-not-allowed"
+                className="w-full flex justify-center py-2 sm:py-2.5 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors disabled:bg-indigo-400 disabled:cursor-not-allowed"
               >
                 {isLoading ? 'Signing in...' : 'Sign in'}
               </button>
