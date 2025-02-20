@@ -8,7 +8,11 @@ const analyticsRouter = require("./routes/analytics");
 const app = express();
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: [
+      "http://localhost:5173",
+      "https://review-analytics.vercel.app/"
+    ],
+    credentials: true,
     allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
