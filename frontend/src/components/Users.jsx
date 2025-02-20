@@ -11,8 +11,7 @@ const Users = () => {
     const fetchUsers = async () => {
       try {
         const token = localStorage.getItem("token");
-        const response = await axios.get(
-            `${import.meta.env.VITE_API_URL}/api/users`, {
+        const response = await axios.get("/api/users", {
           headers: { Authorization: `Bearer ${token}` },
         });
         setUsers(response.data);

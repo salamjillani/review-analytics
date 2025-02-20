@@ -60,8 +60,7 @@ const Dashboard = () => {
           Object.entries(filters).filter(([_, value]) => value !== "")
         );
 
-        const response = await fetch(
-          `${import.meta.env.VITE_API_URL}/api/analytics?${queryParams}`, {
+        const response = await fetch(`/api/analytics?${queryParams}`, {
           headers: { Authorization: `Bearer ${token}` },
         });
 
