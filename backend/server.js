@@ -8,13 +8,9 @@ const analyticsRouter = require("./routes/analytics");
 const app = express();
 app.use(
   cors({
-    origin: [
-      "http://localhost:5173",
-      "https://review-analytics.vercel.app"
-    ],
-    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    origin: "http://localhost:5173",
     credentials: true,
-    allowedHeaders: ["Content-Type", "Authorization"]
+    allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
 app.use(express.json());
