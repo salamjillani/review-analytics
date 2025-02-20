@@ -1,61 +1,60 @@
-import { useState } from "react";
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
+// Login.jsx
+import { useState } from 'react';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 export default function Login() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError("");
+    setError('');
     setIsLoading(true);
 
     try {
-      const response = await axios.post(
-        "/api/auth/login",
+      const response = await axios.post('/api/auth/login', 
         { email, password },
         {
           headers: {
-            "Content-Type": "application/json",
+            'Content-Type': 'application/json',
           },
           timeout: 10000,
         }
       );
 
       const { data } = response;
-
+      
       if (data.token) {
-        localStorage.setItem("token", data.token);
-        localStorage.setItem(
-          "user",
-          JSON.stringify({
-            email: data.email,
-            role: data.role,
-          })
-        );
-        navigate("/");
+        localStorage.setItem('token', data.token);
+        localStorage.setItem('user', JSON.stringify({
+          email: data.email,
+          role: data.role
+        }));
+        navigate('/');
       } else {
-        throw new Error("Invalid server response: No token received");
+        throw new Error('Invalid server response: No token received');
       }
     } catch (err) {
-      let errorMessage = "Login failed: ";
-
+      let errorMessage = 'Login failed: ';
+      
       if (err.response) {
-        errorMessage +=
-          err.response.data?.message || `Server error (${err.response.status})`;
+   
+        errorMessage += err.response.data?.message || 
+          `Server error (${err.response.status})`;
       } else if (err.request) {
-        errorMessage +=
-          "No response from server. Please check your connection.";
-      } else {
-        errorMessage += err.message || "Unknown error occurred";
-      }
 
+        errorMessage += 'No response from server. Please check your connection.';
+      } else {
+   
+        errorMessage += err.message || 'Unknown error occurred';
+      }
+      
       setError(errorMessage);
-      console.error("Login error:", err);
+      console.error('Login error:', err);
     } finally {
       setIsLoading(false);
     }
@@ -79,7 +78,7 @@ export default function Login() {
               <p className="text-xs sm:text-sm text-red-600">{error}</p>
             </div>
           )}
-
+          
           <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
             <div>
               <label className="block text-sm font-medium text-gray-700">
@@ -119,7 +118,7 @@ export default function Login() {
                 disabled={isLoading}
                 className="w-full flex justify-center py-2 sm:py-2.5 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors disabled:bg-indigo-400 disabled:cursor-not-allowed"
               >
-                {isLoading ? "Signing in..." : "Sign in"}
+                {isLoading ? 'Signing in...' : 'Sign in'}
               </button>
             </div>
           </form>
